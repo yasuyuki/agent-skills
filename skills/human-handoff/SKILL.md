@@ -42,14 +42,20 @@ ladder does not apply to it.
   A command that fails after you hand it over doubles the round trips.
 - **Anything that can wrap will arrive broken.** One line is not the bar. A console
   or harness inserts its own break at its own width, and the pasted command then
-  executes halfway or not at all. What you hand over has to be short enough that it
-  cannot wrap in a narrow console — assume the 80-column default.
+  executes halfway or not at all — and a break inside a quoted string leaves the
+  shell hanging at a continuation prompt instead of failing loudly. What you hand
+  over has to be short enough that it cannot wrap in a narrow console — assume the
+  80-column default.
 - **Get there by moving everything into a file**, not by trimming the line. Write a
   temporary script from the machine side; put every path, argument, quote, and
   environment variable inside it; hand over the shortest invocation that runs it —
   a short name in the directory the person is already in (`./x.sh`, `.\x.ps1`).
   Never use a line continuation (`\`, backtick): a stray break destroys it first.
-  Count the characters of the line before you print it.
+- **The launcher counts too.** When the invocation crosses a host or a container
+  (`wsl.exe …`, `ssh …`, `docker exec …`), the prefix plus an absolute path can blow
+  the width on its own. Put the script at a short path on the side that runs it
+  (`/tmp/x.sh`) so the whole line stays small.
+- Count the characters of the line before you print it.
 - Give every step **what success looks like**. Do not make the person invent the check.
 - If you need the result to continue, say **exactly what to paste back** — but never
   credentials, tokens, or personal data. Those stay with the person; you receive
