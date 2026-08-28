@@ -7,16 +7,18 @@ frontmatter.
 Skills are not copied into an agent home. They are linked, so the checkout is
 the only copy and drift is impossible.
 
+`<checkout>` below is wherever this repository is cloned.
+
 Windows (no administrator rights needed):
 
 ```console
-cmd /c mklink /J "C:\Users\flame\.claude\skills\<name>" "C:\Users\flame\work\public\agent-skills\skills\<name>"
+cmd /c mklink /J "%USERPROFILE%\.claude\skills\<name>" "<checkout>\skills\<name>"
 ```
 
-WSL:
+WSL, where `<checkout>` is the same directory reached through `/mnt/<drive>`:
 
 ```console
-ln -s /mnt/c/Users/flame/work/public/agent-skills/skills/<name> ~/.claude/skills/<name>
+ln -s <checkout>/skills/<name> ~/.claude/skills/<name>
 ```
 
 A distro with Windows drive automount disabled cannot reach this checkout and
