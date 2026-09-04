@@ -1,9 +1,13 @@
 # Agent Skills
 
-Source of truth for the maintainer's agent skills. Each skill is a directory
-under `skills/` holding a `SKILL.md` with `name` and `description` frontmatter.
-Nothing here names a particular agent: any agent that loads skills in this
-format can read them.
+The maintainer's agent skills, published from a private canonical source. Each
+skill is a directory under `skills/` holding a `SKILL.md` with `name` and
+`description` frontmatter. Nothing here names a particular agent: any agent that
+loads skills in this format can read them.
+
+Skills are placed the same way always-on rules are — copied from the canonical
+source into each agent's skills directory and compared byte for byte — so the
+copies here are published output, not the working copy. Edits belong upstream.
 
 Always-on policy text belongs in `agent-rules`, not here. A skill is loaded on
 demand, so it carries the longer procedure a rule only points at.
@@ -15,8 +19,8 @@ demand, so it carries the longer procedure a rule only points at.
 
 ## Installing
 
-Skills are not copied into an agent home. They are linked, so the checkout is
-the only copy and drift is impossible.
+Link a skill into your agent's skills directory, so the checkout stays the only
+copy and `git pull` is the whole update.
 
 `<checkout>` is wherever this repository is cloned, `<skills-dir>` is the
 directory your agent reads skills from, and `<name>` is one of the skills above.
