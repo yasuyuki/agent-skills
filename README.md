@@ -1,6 +1,6 @@
 # Agent Skills
 
-The maintainer's agent skills, published from a private canonical source. Each
+The maintainer's agent skills, published from the canonical `agent-rules` source. Each
 skill is a directory under `skills/` holding a `SKILL.md` with `name` and
 `description` frontmatter. Nothing here names a particular agent: any agent that
 loads skills in this format can read them.
@@ -16,6 +16,8 @@ demand, so it carries the longer procedure a rule only points at.
 
 - **`human-handoff`** — Decide whether to ask a person at all, then shrink
   whatever is left to something they can paste in one shot.
+- **`maintain-environment-inventory`** — Keep environment references and every
+  agent's management skill placement consistent when changing or selecting a runtime.
 
 ## Installing
 
