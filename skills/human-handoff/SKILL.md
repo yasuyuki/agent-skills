@@ -32,7 +32,9 @@ actual screen or successfully completing the action.
 
 Relaying a request to another environment's agent is a human action when the
 person must carry it. Name the receiving environment and provide the exact text
-to paste, separately from the instructions to the person. Include necessary URLs
+to paste, separately from the instructions to the person. Include the receiving
+environment in the payload itself, so it survives forwarding without the
+surrounding explanation. Include necessary URLs
 as literal text inside the copyable payload, not only hyperlink attributes.
 Use a plain-text code block without quote prefixes or list decorations that the
 person must remove. Do not ask them to reconstruct references or edit the request.
