@@ -1,47 +1,77 @@
 # Agent Skills
 
-The maintainer's agent skills, published from the canonical `agent-rules` source. Each
-skill is a directory under `skills/` holding a `SKILL.md` with `name` and
-`description` frontmatter. Nothing here names a particular agent: any agent that
-loads skills in this format can read them.
+Generated public mirror of the original skills maintained in
+[agent-rules](https://github.com/yasuyuki/agent-rules). **Edit skills upstream in
+agent-rules; do not edit this repository’s generated `skills/` subtree.**
+Each skill has a `SKILL.md` with name and description metadata, plus any referenced
+files. This checkout can be read by an agent supporting that format.
 
-Skills are placed the same way always-on rules are — copied from the canonical
-source into each agent's skills directory and compared byte for byte — so the
-copies here are published output, not the working copy. Edits belong upstream.
+## Published skills
 
-Always-on policy text belongs in `agent-rules`, not here. A skill is loaded on
-demand, so it carries the longer procedure a rule only points at.
+- **human-handoff** — Make remaining human actions reliable to carry out.
+- **maintain-environment-inventory** — Maintain environment references and management
+  skill placement when changing or selecting a runtime.
+- **classify-work** — Classify unfinished work and propose suitable environments
+  without executing the work.
+- **verify-agent-rules** — Exercise placement and safe updates with disposable data
+  and retained evidence; optionally verify dependency composition and mirroring.
 
-## Skills
+Publication is original-work-only. The upstream `skills/UPSTREAM.tsv` controls
+exclusion: `grilling` and `create-verification-skill` are intentionally absent.
+This mirror does not contain all upstream skills, the agent-rules CLI, or private
+configuration. See [LICENSE](LICENSE) for the MIT license.
 
-- **`human-handoff`** — Decide whether to ask a person at all, then shrink
-  whatever is left to something they can paste in one shot.
-- **`maintain-environment-inventory`** — Keep environment references and every
-  agent's management skill placement consistent when changing or selecting a runtime.
+## Using the public mirror
 
-## Installing
+For initial setup, clone this repository’s `main` branch and give your agent the
+path to the selected `skills/<name>/SKILL.md`. Read that file and its relative
+references; keep the skill directory intact. An explicit path works independently
+of native automatic skill discovery, which depends on the agent product.
 
-Link a skill into your agent's skills directory, so the checkout stays the only
-copy and `git pull` is the whole update.
+For example, ask the agent to read `skills/verify-agent-rules/SKILL.md` from this
+checkout and verify a selected agent-rules checkout. It runs **this distributed
+skill’s** `scripts/verify.py` by its actual path, with the target checkout supplied
+through `--repo`. Python 3.10+ and Git are required. The default profile needs no
+private repository and prints the path to retained verification evidence.
 
-`<checkout>` is wherever this repository is cloned, `<skills-dir>` is the
-directory your agent reads skills from, and `<name>` is one of the skills above.
+Optional links into an agent’s native skills directory are a separate installation
+method from managed placement. Preserve any existing file or directory at the
+chosen destination. Follow the product’s discovery/reload requirements after
+setup or update. Updating this checkout changes linked files, but does not prove
+that a running agent has reloaded them or that other environments adopted them.
+Existing link users do not need to migrate for this publication repair.
 
-Windows (no administrator rights needed):
+Normal use is simply to read and follow the selected skill. It does not require
+regenerating this mirror, checking synchronization, selecting an old topic branch,
+or auditing adoption history before each invocation.
 
-```console
-cmd /c mklink /J "<skills-dir>\<name>" "<checkout>\skills\<name>"
-```
+## Managed environments
 
-WSL, where `<checkout>` is the same directory reached through `/mnt/<drive>`:
+Use the environment’s existing declaration and the upstream agent-rules
+`place.py apply` / `check` entry points to place and compare skills from the
+canonical source. Do not add this mirror as a second source for the same skills.
+Environments needing excluded skills continue to use that upstream placement
+path. Updating this public checkout does not update managed environments.
 
-```console
-ln -s <checkout>/skills/<name> <skills-dir>/<name>
-```
+## Updating the publication
 
-A distro with Windows drive automount disabled cannot reach this checkout and
-is out of scope for linking.
+Maintainers first integrate skill changes in agent-rules and select that committed
+source. Use the existing public `bin/place.py mirror` command from that source;
+`mirror --help` describes `--skills`, `--dest`, and `--check`. The source argument
+selects its `skills/` directory and the destination is the protected agent-skills
+candidate checkout. No private configuration is required.
 
-## License
+The generator owns the entire destination `skills/` subtree, including removal of
+unexpected content. Inspect local changes and use a disposable output before
+applying it to a candidate. Preserve unrelated root files such as this README and
+LICENSE, and keep unmanaged or unsaved content outside the generated subtree.
+Run the same command with `--check`, compare the manifest-selected file set,
+bytes and required executable attributes, and verify repeat generation and drift
+detection in disposable output. Update this skill list when the public set changes.
 
-MIT. See `LICENSE`.
+Review and commit the generated output with the selected upstream revision in the
+commit message, then use the repository’s normal integration route to `main`.
+That commit records provenance; there is no separate source ledger. Consumers
+update their checkout from `main` through their existing Git workflow and follow
+any product-specific reload steps. Generation is an upstream-change operation,
+not a prerequisite for ordinary skill use.
