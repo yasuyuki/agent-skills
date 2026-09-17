@@ -13,6 +13,10 @@ files. This checkout can be read by an agent supporting that format.
   skill placement when changing or selecting a runtime.
 - **classify-work** — Classify unfinished work and propose suitable environments
   without executing the work.
+- [**optimize-human-docs**](skills/optimize-human-docs/SKILL.md) — Create or revise
+  human-facing documentation around the reader's decisions and actions.
+- [**optimize-agent-docs**](skills/optimize-agent-docs/SKILL.md) — Create or revise
+  agent instructions while retaining decisions unavailable from code or help.
 - **verify-agent-rules** — Exercise placement and safe updates with disposable data
   and retained evidence; optionally verify dependency composition and mirroring.
 
