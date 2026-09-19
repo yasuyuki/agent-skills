@@ -1,81 +1,38 @@
 # Agent Skills
 
-Generated public mirror of the original skills maintained in
-[agent-rules](https://github.com/yasuyuki/agent-rules). **Edit skills upstream in
-agent-rules; do not edit this repository’s generated `skills/` subtree.**
-Each skill has a `SKILL.md` with name and description metadata, plus any referenced
-files. This checkout can be read by an agent supporting that format.
+Public source for reusable agent skills. Select a skill directory and read its
+`SKILL.md`; each directory is standalone and keeps its relative references.
+These generic skills are edited here:
 
-## Published skills
+- [human-handoff](skills/human-handoff/SKILL.md) — Make remaining human actions reliable to carry out.
+- [optimize-human-docs](skills/optimize-human-docs/SKILL.md) — Create or revise human-facing documentation around the reader's decisions and actions.
+- [optimize-agent-docs](skills/optimize-agent-docs/SKILL.md) — Create or revise agent instructions while retaining decisions unavailable from code or help.
 
-- **human-handoff** — Make remaining human actions reliable to carry out.
-- **maintain-environment-inventory** — Maintain environment references and management
-  skill placement when changing or selecting a runtime.
-- **classify-work** — Classify unfinished work and propose suitable environments
-  without executing the work.
-- [**optimize-human-docs**](skills/optimize-human-docs/SKILL.md) — Create or revise
-  human-facing documentation around the reader's decisions and actions.
-- [**optimize-agent-docs**](skills/optimize-agent-docs/SKILL.md) — Create or revise
-  agent instructions while retaining decisions unavailable from code or help.
-- **verify-agent-rules** — Exercise placement and safe updates with disposable data
-  and retained evidence; optionally verify dependency composition and mirroring.
+See [LICENSE](LICENSE) for the MIT license. This repository contains no private
+configuration or agent-rules runtime.
 
-Publication is original-work-only. The upstream `skills/UPSTREAM.tsv` controls
-exclusion: `grilling` and `create-verification-skill` are intentionally absent.
-This mirror does not contain all upstream skills, the agent-rules CLI, or private
-configuration. See [LICENSE](LICENSE) for the MIT license.
+## Using the source
 
-## Using the public mirror
+Clone this repository at the revision selected by the consumer and give your
+agent the path to the selected `skills/<name>/SKILL.md`. Read that file and its
+relative references; keep the skill directory intact. An explicit path works
+independently of native automatic skill discovery, which depends on the agent
+product.
 
-For initial setup, clone this repository’s `main` branch and give your agent the
-path to the selected `skills/<name>/SKILL.md`. Read that file and its relative
-references; keep the skill directory intact. An explicit path works independently
-of native automatic skill discovery, which depends on the agent product.
-
-For example, ask the agent to read `skills/verify-agent-rules/SKILL.md` from this
-checkout and verify a selected agent-rules checkout. It runs **this distributed
-skill’s** `scripts/verify.py` by its actual path, with the target checkout supplied
-through `--repo`. Python 3.10+ and Git are required. The default profile needs no
-private repository and prints the path to retained verification evidence.
-
-Optional links into an agent’s native skills directory are a separate installation
-method from managed placement. Preserve any existing file or directory at the
-chosen destination. Follow the product’s discovery/reload requirements after
-setup or update. Updating this checkout changes linked files, but does not prove
-that a running agent has reloaded them or that other environments adopted them.
-Existing link users do not need to migrate for this publication repair.
+Optional links into an agent's native skills directory are a separate
+installation method. Preserve any existing file or directory at the chosen
+destination and follow the product's discovery/reload requirements after setup
+or update. Updating this source does not prove that a running agent has reloaded
+it.
 
 Normal use is simply to read and follow the selected skill. It does not require
-regenerating this mirror, checking synchronization, selecting an old topic branch,
-or auditing adoption history before each invocation.
+regenerating a mirror or selecting an old topic branch before each invocation.
 
-## Managed environments
+## Project-owned skills
 
-Use the environment’s existing declaration and the upstream agent-rules
-`place.py apply` / `check` entry points to place and compare skills from the
-canonical source. Do not add this mirror as a second source for the same skills.
-Environments needing excluded skills continue to use that upstream placement
-path. Updating this public checkout does not update managed environments.
-
-## Updating the publication
-
-Maintainers first integrate skill changes in agent-rules and select that committed
-source. Use the existing public `bin/place.py mirror` command from that source;
-`mirror --help` describes `--skills`, `--dest`, and `--check`. The source argument
-selects its `skills/` directory and the destination is the protected agent-skills
-candidate checkout. No private configuration is required.
-
-The generator owns the entire destination `skills/` subtree, including removal of
-unexpected content. Inspect local changes and use a disposable output before
-applying it to a candidate. Preserve unrelated root files such as this README and
-LICENSE, and keep unmanaged or unsaved content outside the generated subtree.
-Run the same command with `--check`, compare the manifest-selected file set,
-bytes and required executable attributes, and verify repeat generation and drift
-detection in disposable output. Update this skill list when the public set changes.
-
-Review and commit the generated output with the selected upstream revision in the
-commit message, then use the repository’s normal integration route to `main`.
-That commit records provenance; there is no separate source ledger. Consumers
-update their checkout from `main` through their existing Git workflow and follow
-any product-specific reload steps. Generation is an upstream-change operation,
-not a prerequisite for ordinary skill use.
+Environment inventory, work classification, and agent-rules verification remain
+project-owned in [maintain-environment-inventory](https://github.com/yasuyuki/agent-rules/tree/main/skills/maintain-environment-inventory),
+[classify-work](https://github.com/yasuyuki/agent-rules/tree/main/skills/classify-work),
+and [verify-agent-rules](https://github.com/yasuyuki/agent-rules/tree/main/skills/verify-agent-rules).
+Choose that source explicitly when you need one of those skills; this repository
+is not a reverse mirror of it.
