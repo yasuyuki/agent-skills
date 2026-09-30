@@ -36,3 +36,11 @@ project-owned in [maintain-environment-inventory](https://github.com/yasuyuki/ag
 and [verify-agent-rules](https://github.com/yasuyuki/agent-rules/tree/main/skills/verify-agent-rules).
 Choose that source explicitly when you need one of those skills; this repository
 is not a reverse mirror of it.
+
+## Optional pstack bundle
+
+[Pstack](bundles/pstack/MIRROR.md) is a separately selected, fixed-revision MIT
+bundle. Use `bundles/pstack` as an explicit existing Rulesync `input_roots`
+selection, alongside the deployment owner's private pstack-settings source.
+The default generic `skills/` source is unchanged. Common source updates have
+one owner and decision; native products consume it through existing adapters.
