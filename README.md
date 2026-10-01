@@ -5,6 +5,9 @@ Public source for reusable agent skills. Select a skill directory and read its
 These generic skills are edited here:
 
 - [human-handoff](skills/human-handoff/SKILL.md) — Make remaining human actions reliable to carry out.
+- [domain-modeling](skills/domain-modeling/SKILL.md) — Record project terms and architecture decisions.
+- [grill-with-docs](skills/grill-with-docs/SKILL.md) — Challenge an idea and capture the resulting domain documents.
+- [grilling](skills/grilling/SKILL.md) — Stress-test a plan or decision.
 - [optimize-human-docs](skills/optimize-human-docs/SKILL.md) — Create or revise human-facing documentation around the reader's decisions and actions.
 - [optimize-agent-docs](skills/optimize-agent-docs/SKILL.md) — Create or revise agent instructions while retaining decisions unavailable from code or help.
 
