@@ -10,6 +10,7 @@ These generic skills are edited here:
 - [grilling](skills/grilling/SKILL.md) — Stress-test a plan or decision.
 - [optimize-human-docs](skills/optimize-human-docs/SKILL.md) — Create or revise human-facing documentation around the reader's decisions and actions.
 - [optimize-agent-docs](skills/optimize-agent-docs/SKILL.md) — Create or revise agent instructions while retaining decisions unavailable from code or help.
+- [coordinate-repository-versions](skills/coordinate-repository-versions/SKILL.md) — Audit cross-repository compatibility and plan owned pin changes, adoption checks, and rollback.
 
 See [LICENSE](LICENSE) for the MIT license. This repository contains no private
 configuration or agent-rules runtime.
