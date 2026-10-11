@@ -48,3 +48,10 @@ bundle. Use `bundles/pstack` as an explicit existing Rulesync `input_roots`
 selection, alongside the deployment owner's private pstack-settings source.
 The default generic `skills/` source is unchanged. Common source updates have
 one owner and decision; native products consume it through existing adapters.
+
+## Optional mattpocock bundle
+
+[mattpocock](bundles/mattpocock/MIRROR.md) is a separately selected,
+fixed-revision MIT bundle containing `retro` and its required
+`writing-for-agents`. Select `bundles/mattpocock` as an explicit Rulesync
+`input_roots` entry.

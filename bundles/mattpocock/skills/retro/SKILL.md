@@ -1,0 +1,11 @@
+---
+name: retro
+description: "Conduct a retrospective on a coding session."
+disable-model-invocation: true
+codexcli:
+  interface:
+    display_name: "Retro"
+    short_description: "Conduct a retrospective on a coding session."
+  policy:
+    allow_implicit_invocation: false
+---
