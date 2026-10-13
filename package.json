@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Pinned Rulesync for tests/check_skills.py",
+  "dependencies": {
+    "rulesync": "16.39.1"
+  }
+}

@@ -28,3 +28,41 @@ one revision/adaptation decision here, validates it and reapplies via existing
 placement; product adapters do not fork or independently rewrite this source.
 Updates do not prove native session adoption; behavioral acceptance belongs to
 the deployment owner. No installer or launch wrapper is added.
+
+## Checked differences
+
+`python3 tests/check_skills.py` requires every other file under `skills/` to
+match the same skill directory upstream, comparing SKILL.md after frontmatter.
+Paths are relative to `skills/`:
+
+- license `*/LICENSE.pstack.txt`
+- license `create-verification-skill/LICENSE.txt`
+- added `pstack-runtime/SKILL.md`
+- added `create-verification-skill/references/sources.md`
+- adapted `architect/SKILL.md`
+- adapted `arena/SKILL.md`
+- adapted `automate-me/SKILL.md`
+- adapted `create-verification-skill/SKILL.md`
+- adapted `figure-it-out/SKILL.md`
+- adapted `how/SKILL.md`
+- adapted `interrogate/SKILL.md`
+- adapted `maintain-verification-skill/SKILL.md`
+- adapted `make-bot-ui/SKILL.md`
+- adapted `no-comments/SKILL.md`
+- adapted `poteto-mode/SKILL.md`
+- adapted `poteto-mode/playbooks/bug-fix.md`
+- adapted `poteto-mode/playbooks/feature.md`
+- adapted `poteto-mode/playbooks/hillclimb.md`
+- adapted `poteto-mode/playbooks/investigation.md`
+- adapted `poteto-mode/playbooks/multi-phase-plan.md`
+- adapted `poteto-mode/playbooks/perf-issue.md`
+- adapted `poteto-mode/playbooks/refactoring.md`
+- adapted `poteto-mode/playbooks/runtime-forensics.md`
+- adapted `poteto-mode/playbooks/trace-forensics.md`
+- adapted `principle-never-block-on-the-human/SKILL.md`
+- adapted `recall/SKILL.md`
+- adapted `reflect/SKILL.md`
+- adapted `setup-pstack/SKILL.md`
+- adapted `show-me-your-work/SKILL.md`
+- adapted `swarm/SKILL.md`
+- adapted `why/SKILL.md`
