@@ -15,3 +15,12 @@ receives both skills.
 Consumers explicitly select `bundles/mattpocock` with existing Rulesync
 input_roots. Updates re-import a new pinned revision here and reapply through
 existing placement; they do not prove native session adoption.
+
+## Checked differences
+
+`python3 tests/check_skills.py` requires every other file under `skills/` to
+match the same skill directory upstream, comparing SKILL.md after frontmatter.
+Paths are relative to `skills/`:
+
+- license `*/LICENSE.txt`
+- omitted `*/agents/openai.yaml`
