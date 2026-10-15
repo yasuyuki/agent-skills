@@ -7,7 +7,7 @@ description: Resolve pstack native harness, private role settings, delegation an
 # Pstack runtime contract
 
 Common upstream acquired from https://github.com/backnotprop/pstack at
-`157aae39a733135e93d8b5b19ff62c6a84b0ad56`; MIT, Lauren Tan. Each standalone
+`1f0f9c3bac03c4297f6fc8f7644fa412eda57085`; MIT, Lauren Tan. Each standalone
 skill retains the fixed upstream notice in `LICENSE.pstack.txt`.
 
 Read this contract before following operational instructions in pstack skills,
