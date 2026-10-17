@@ -11,6 +11,7 @@ These generic skills are edited here:
 - [optimize-human-docs](skills/optimize-human-docs/SKILL.md) — Create or revise human-facing documentation around the reader's decisions and actions.
 - [optimize-agent-docs](skills/optimize-agent-docs/SKILL.md) — Create or revise agent instructions while retaining decisions unavailable from code or help.
 - [coordinate-repository-versions](skills/coordinate-repository-versions/SKILL.md) — Audit cross-repository compatibility and plan owned pin changes, adoption checks, and rollback.
+- [cross-domain-discovery](skills/cross-domain-discovery/SKILL.md) — Discover a useful method by matching a problem's causal structure to a distant mechanism.
 
 See [LICENSE](LICENSE) for the MIT license. This repository contains no private
 configuration or agent-rules runtime.
