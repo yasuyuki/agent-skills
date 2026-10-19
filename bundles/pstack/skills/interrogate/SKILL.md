@@ -34,7 +34,7 @@ acceptance. Native calls and read-only reviewer scope follow pstack-runtime.
 Unavailable configured models are BLOCKED; do not substitute a model or open an
 extra PR to change configuration. Pass the same rubric to each chosen reviewer.
 
-Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`.
+Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`. Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **poteto-mode** skill.
 
 ## Step 4, Synthesize
 

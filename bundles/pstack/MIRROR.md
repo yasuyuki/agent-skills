@@ -1,7 +1,7 @@
 # Pstack source ownership and provenance
 
 Fixed acquisition source: https://github.com/backnotprop/pstack at
-`1f0f9c3bac03c4297f6fc8f7644fa412eda57085` (MIT, Lauren Tan).
+`6f131f137de64fdaf928278c0fd9ecec520ccbee` (MIT, Lauren Tan).
 This is one adapted copy; support references, playbooks and scripts are retained.
 `LICENSE` retains upstream terms. Its fixed notice is copied as
 `LICENSE.pstack.txt` in each skill for standalone native distribution. `UPSTREAM` records the pinned import.
@@ -58,8 +58,11 @@ Paths are relative to `skills/`:
 - adapted `poteto-mode/playbooks/multi-phase-plan.md`
 - adapted `poteto-mode/playbooks/perf-issue.md`
 - adapted `poteto-mode/playbooks/refactoring.md`
+- adapted `poteto-mode/playbooks/shipping.md`
 - adapted `poteto-mode/playbooks/runtime-forensics.md`
 - adapted `poteto-mode/playbooks/trace-forensics.md`
+- adapted `poteto-mode/scripts/orch/store.ts`
+- adapted `poteto-mode/scripts/orch/orch.test.ts`
 - adapted `principle-never-block-on-the-human/SKILL.md`
 - adapted `recall/SKILL.md`
 - adapted `reflect/SKILL.md`
