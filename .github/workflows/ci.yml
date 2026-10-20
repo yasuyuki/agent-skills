@@ -20,3 +20,14 @@ jobs:
           node-version: "24"
       - run: npm ci --ignore-scripts
       - run: python3 tests/check_skills.py
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.14"
+      - name: Copy pstack scripts outside the distributed tree
+        run: cp -R bundles/pstack/skills/poteto-mode/scripts "$RUNNER_TEMP/pstack-scripts"
+      - working-directory: ${{ runner.temp }}/pstack-scripts
+        run: bun install --frozen-lockfile
+      - working-directory: ${{ runner.temp }}/pstack-scripts
+        run: bun run test
+      - working-directory: ${{ runner.temp }}/pstack-scripts
+        run: bun run typecheck
