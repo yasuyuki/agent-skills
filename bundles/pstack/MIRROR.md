@@ -1,7 +1,7 @@
 # Pstack source ownership and provenance
 
 Fixed acquisition source: https://github.com/backnotprop/pstack at
-`6f131f137de64fdaf928278c0fd9ecec520ccbee` (MIT, Lauren Tan).
+`e44668c2aad92eacf4e84df47984121fefb11b82` (MIT, Lauren Tan).
 This is one adapted copy; support references, playbooks and scripts are retained.
 `LICENSE` retains upstream terms. Its fixed notice is copied as
 `LICENSE.pstack.txt` in each skill for standalone native distribution. `UPSTREAM` records the pinned import.
@@ -42,11 +42,13 @@ Paths are relative to `skills/`:
 - adapted `architect/SKILL.md`
 - adapted `arena/SKILL.md`
 - adapted `automate-me/SKILL.md`
+- adapted `create-formal-verification-skill/SKILL.md`
 - adapted `create-verification-skill/SKILL.md`
 - adapted `figure-it-out/SKILL.md`
 - adapted `how/SKILL.md`
 - adapted `interrogate/SKILL.md`
 - adapted `maintain-verification-skill/SKILL.md`
+- adapted `maintain-formal-verification-skill/SKILL.md`
 - adapted `make-bot-ui/SKILL.md`
 - adapted `no-comments/SKILL.md`
 - adapted `poteto-help/SKILL.md`
