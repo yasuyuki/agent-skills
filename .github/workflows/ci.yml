@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: "24"
       - run: npm ci --ignore-scripts
+      - run: python3 -m unittest discover -s tests -p test_local_patches.py
       - run: python3 tests/check_skills.py
       - uses: oven-sh/setup-bun@v2
         with:

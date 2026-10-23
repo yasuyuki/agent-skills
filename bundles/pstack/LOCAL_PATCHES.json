@@ -1,0 +1,10 @@
+[
+  {
+    "patch": "patches/no-comments-evidence-review.patch",
+    "issue": "https://github.com/backnotprop/pstack/issues/14",
+    "files": [
+      "no-comments/SKILL.md",
+      "no-comments/references/comment-sicko.md"
+    ]
+  }
+]

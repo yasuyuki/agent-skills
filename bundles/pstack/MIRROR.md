@@ -29,6 +29,24 @@ placement; product adapters do not fork or independently rewrite this source.
 Updates do not prove native session adoption; behavioral acceptance belongs to
 the deployment owner. No installer or launch wrapper is added.
 
+## Temporary no-comments patch
+
+[pstack #14](https://github.com/backnotprop/pstack/issues/14) tracks the
+evidence and scope-isolation problem observed in a downstream comment review.
+`LOCAL_PATCHES.json` records the patch against the selected `UPSTREAM` revision.
+The source check applies it to a disposable upstream checkout and compares the
+result with the distributed sources. An overwritten adaptation or a conflicting
+upstream update fails that check.
+
+The checked patch includes the existing native-delegation adaptation so the
+comparison covers the complete downstream body. Keep that runtime contract when
+retiring the temporary review changes.
+
+Retain this patch until the upstream resolution is adopted and its behavior is
+verified. At that update, remove a superseded patch or deliberately rebase the
+remaining difference, with the decision recorded in the owning task. Update the
+patch, manifest, and adapted-path entries together.
+
 ## Checked differences
 
 `python3 tests/check_skills.py` requires every other file under `skills/` to
@@ -51,6 +69,7 @@ Paths are relative to `skills/`:
 - adapted `maintain-formal-verification-skill/SKILL.md`
 - adapted `make-bot-ui/SKILL.md`
 - adapted `no-comments/SKILL.md`
+- adapted `no-comments/references/comment-sicko.md`
 - adapted `poteto-help/SKILL.md`
 - adapted `poteto-mode/SKILL.md`
 - adapted `poteto-mode/playbooks/bug-fix.md`

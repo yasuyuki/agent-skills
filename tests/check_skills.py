@@ -14,6 +14,7 @@ Missing Rulesync, network or git is a failure.
 from __future__ import annotations
 
 import fnmatch
+import json
 import os
 import re
 import subprocess
@@ -193,6 +194,31 @@ def check_upstream(bundle: Path, upstream: Path) -> dict[tuple[str, str], bytes]
     return expected
 
 
+def check_local_patches(bundle: Path, upstream: Path) -> dict[tuple[str, str], bytes]:
+    manifest = bundle / "LOCAL_PATCHES.json"
+    if not manifest.is_file():
+        return {}
+    expected = {}
+    for entry in json.loads(manifest.read_text(encoding="utf-8")):
+        patch = bundle / entry["patch"]
+        issue = entry["issue"]
+        for mode in (("--check",), ()):
+            result = run(["git", "-C", str(upstream), "apply", *mode, str(patch.resolve())])
+            if result.returncode:
+                fail(f"{bundle.name}: temporary patch {entry['patch']} cannot apply; reconcile {issue}: {result.stderr.strip()}")
+                break
+        else:
+            for rel in entry["files"]:
+                name, resource = rel.split("/", 1)
+                source = bundle / "skills" / rel
+                patched = upstream / "skills" / rel
+                want = content(resource, patched.read_bytes())
+                if content(resource, source.read_bytes()) != want:
+                    fail(f"{bundle.name}: {rel} lost or changed its temporary patch; reconcile {issue}")
+                expected[(name, resource)] = want
+    return expected
+
+
 def main() -> int:
     roots = [REPO, *sorted(p.parent for p in (REPO / "bundles").glob("*/skills") if p.is_dir())]
     skills: dict[str, Path] = {}
@@ -213,6 +239,7 @@ def main() -> int:
             url, commit = (root / "UPSTREAM").read_text(encoding="utf-8").split()[:2]
             upstream = fetch(url, commit, temp / "upstream" / root.name)
             upstream_expected.update(check_upstream(root, upstream))
+            upstream_expected.update(check_local_patches(root, upstream))
         homes = generate(executable, roots, temp)
 
         def expected(name: str, rel: str) -> bytes | None:
