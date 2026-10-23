@@ -1,0 +1,59 @@
+--- a/skills/no-comments/SKILL.md
++++ b/skills/no-comments/SKILL.md
+@@ -3,6 +3,9 @@
+ description: "Spawn Comment Sicko, fix accepted findings, and offer encodings for claimed constraints."
+ disable-model-invocation: true
+ ---
++
++Read [pstack-runtime](../pstack-runtime/SKILL.md) before this workflow. Its native capability, settings, permission and lifecycle contract governs every referenced playbook.
++
+
+ # No comments
+
+@@ -14,11 +17,13 @@
+
+ Use the caller's files or diff. Otherwise use the current diff against the base branch, default `main`, including the working tree.
+
++For a repository-wide review, inventory tracked files with `git ls-files`. Account for Rustdoc and functional comment directives separately from ordinary comments. A directory name alone does not establish that tracked source is generated.
++
+ ## Steps
+
+-1. Spawn `Task` with `subagent_type: "comment-sicko"`. Pass the scope. Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **poteto-mode** skill. Do not restate its rules. If your harness doesn't have comment-sicko registered as a subagent (any harness other than Cursor with the pstack plugin), spawn a general subagent instead: `Agent` in Claude Code (`subagent_type: general-purpose`), `task` in OpenCode (`subagent_type: general`), `spawn_agent` in Codex. Its prompt is [`references/comment-sicko.md`](references/comment-sicko.md) verbatim, then the scope. If your harness has no subagent tool, as in Pi without an extension, run that prompt yourself in a fresh pass over the scope.
+-2. Inspect its report and diff. Reject application-code edits, scope escapes, exception-protected deletions, misstated `MUST KILL` reasons, and flags that treat kept intentional code as guilty. Reshape flags on our-code surprises stay actionable. Do not restore those comments. A keep survives only with proof it is about something we cannot change. Audit missed scoped lint and TypeScript suppressions. Correctness or safety suppressions stay actionable `MUST KILL`s. Restore deletions only with exact exceptions and scoped proof. Before accepting thin `IMPORTANT` or `do not remove` kills or keeps, run `/how` or `/why` on their symbol. If a kill is ambiguous, do not restore. If a keep is refuted or still ambiguous, delete it. Revert and rerun one rejected report with the failure named. Reject a second, report it open, and fail `/no-comments`.
+-3. Fix trivial accepted flags directly by deleting a dead path, dropping a parameter, or using the real API. If any fix needs a shape, run `/architect` once for the accepted set and surrounding code. Stop at the sketch. Architect shapes. Step 4 implements.
++1. Delegate a scoped read-only review using pstack-runtime and the prompt in [`references/comment-sicko.md`](references/comment-sicko.md). Apply only authorized changes after the lead reviews findings; unsupported delegation is BLOCKED.
++2. Adjudicate findings before applying them. Reject application-code edits, scope escapes, exception-protected deletions, and unsupported `MUST KILL` reasons. Require exact source spans; external-constraint findings must identify the relevant dependency implementation or primary specification. Restating a comment is not proof. Verify that public-API documentation describes an exported contract. Check functional directives and scoped lint or TypeScript suppressions before deleting them. Mark unresolved exceptions `NEEDS REVIEW` and preserve their original text. Investigate thin `IMPORTANT` or `do not remove` claims against the named code and external contract; use `/how` or `/why` when that evidence is insufficient. Rerun a rejected scope once with the failure named. If it is still invalid, leave that scope unchanged and report it unresolved. Continue independently accepted scopes and report partial completion when work remains.
++3. Accept a reshape flag only when the current code has a demonstrated defect or missing guarantee. Inspect existing types, tests, and proofs first. A comment explaining correct code, or a possible future edit, does not by itself require rearchitecture. Fix trivial accepted flags directly by deleting a dead path, dropping a parameter, or using the real API. Correctness or safety suppressions remain actionable until their cause is fixed. If an accepted fix needs a shape, run `/architect` once for that set and surrounding code. Stop at the sketch. Step 4 implements.
+ 4. Implement the smallest root-cause fix in scope. Remove every named workaround. If the root cause is out of scope, land the smallest in-scope fix and report the rest open. The **principle-fix-root-causes** and **principle-redesign-from-first-principles** skills guide intent only. Neither authorizes widening the fence nor fixing instances outside it. Never bolt on symptom guards.
+-5. Constraint comments say `do not remove`, `do not change wording`, or `talk to X before changing`. Leave keeps about things we cannot change. Offer the cheapest in-scope type, runtime, test, or CI lint. Wait for interactive approval. Unattended and eval require caller pre-approval. If approved, encode then delete. Otherwise delete, report the constraint open, and sketch out-of-scope work.
+-6. Report the deletion count, restored comments, reruns, architect sketch, fixes, encoding offers, encodings, unenforced constraints, and other open work.
++5. Constraint comments say `do not remove`, `do not change wording`, or `talk to X before changing`. Preserve proven external constraints. Where an in-scope encoding can replace a necessary comment, offer the cheapest type, runtime check, test, or CI lint and wait for interactive approval. Unattended and eval require caller pre-approval. If approved, encode then delete. Otherwise preserve the comment and report the constraint open. Sketch out-of-scope work separately.
++6. Report applied deletions, restored comments, reruns, any architect sketch and fixes, encoding offers and results, and unresolved scopes or constraints. Distinguish accepted work from unadjudicated candidates.
+--- a/skills/no-comments/references/comment-sicko.md
++++ b/skills/no-comments/references/comment-sicko.md
+@@ -14,19 +14,19 @@
+ Only these exceptions get to crawl away.
+
+ - Legal or license headers.
+-- Non-obvious behavior forced by an external dependency, platform, vendor, or protocol we cannot reshape. Surprises in our own code are meat. Kill them and mark the exact symbol `MUST KILL` for rename, extract, type, or rearchitecture that makes the behavior obvious without prose.
++- Non-obvious behavior forced by an external dependency, platform, vendor, or protocol we cannot reshape. Cite the relevant dependency implementation or primary specification and connect it to the live code.
+ - `// prettier-ignore`. Lint suppressions survive only when their rule is faulty, pedantic, or style-only.
+ - Doc comments that define a public API contract.
+ - Issue or RFC links that explain a constraint code cannot express.
+
+-That list is my only leash. When I am not sure a keep clause applies, the comment dies. Everything else is meat.
++That list is my only leash. Classify ordinary narration for deletion. When a possible exception remains unresolved, mark it `NEEDS REVIEW` and preserve the original text until the lead adjudicates it. Keep functional compiler or tool directives until their behavior has been checked.
+
+-`eslint-disable`, `@ts-ignore`, `@ts-expect-error`, and similar suppressions stink. Look up the rule. If it catches real bugs or protects correctness or safety, kill the suppression and mark the exact guilty symbol `MUST KILL`.
++`eslint-disable`, `@ts-ignore`, `@ts-expect-error`, and similar suppressions stink. Look up the rule. If it catches real bugs or protects correctness or safety, identify the exact guilty symbol and the cause that must be fixed before the suppression can be removed.
+
+-`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code. If its claim is not obvious there, I run `/how`, `/why`, or both from the **how** and **why** skills on the named symbol or call. Only a foreign keep-list gotcha proven true today on a live path crawls away. Our-code surprises die with the reshape flag above. Doubt after the hunt is meat.
++`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code and check the named external contract. If that evidence is insufficient, I use `/how` or `/why` on the named symbol or call. Evidence decides the exception; wording and length do not. A public declaration alone does not prove its documentation defines an exported API contract.
+
+-A long justification without a proven keep-list exception is a confession. Kill it. Never polish meat into a shorter alibi. Mark the exact guilty symbol `MUST KILL`. My kill ends there. I do not touch the code.
++I reserve `MUST KILL` reshape flags for demonstrated current defects or missing guarantees after checking existing types, tests, and proofs. Correct code does not become guilty because its comment explains an invariant or a future edit could break it. Routine narration can be deleted without redesign. I do not touch application code.
+
+ Every flag names code inside the scope and tells the truth. I invent nothing. I touch comments and identify refactor targets. I never write application code.
+
+-Report only. Name touched files, deletion count, `MUST KILL` flags with one line each, and skips.
++Report only. Group ordinary narration deletions by file with exact spans. Give each keep, `NEEDS REVIEW`, suppression, and reshape flag its source span, reason, and evidence. Name proposed files and deletion counts, with unresolved scopes and skips. Candidates are not applied deletions.
