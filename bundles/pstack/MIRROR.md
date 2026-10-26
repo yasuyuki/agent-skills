@@ -1,7 +1,7 @@
 # Pstack source ownership and provenance
 
 Fixed acquisition source: https://github.com/backnotprop/pstack at
-`e44668c2aad92eacf4e84df47984121fefb11b82` (MIT, Lauren Tan).
+`fad8d01588a1b1ae803f87c8a1e0de79e28cffec` (MIT, Lauren Tan).
 This is one adapted copy; support references, playbooks and scripts are retained.
 `LICENSE` retains upstream terms. Its fixed notice is copied as
 `LICENSE.pstack.txt` in each skill for standalone native distribution. `UPSTREAM` records the pinned import.
@@ -42,10 +42,13 @@ The checked patch includes the existing native-delegation adaptation so the
 comparison covers the complete downstream body. Keep that runtime contract when
 retiring the temporary review changes.
 
-Retain this patch until the upstream resolution is adopted and its behavior is
-verified. At that update, remove a superseded patch or deliberately rebase the
-remaining difference, with the decision recorded in the owning task. Update the
-patch, manifest, and adapted-path entries together.
+Upstream closed #14 in `02b59d7`, keeping unverifiable outside-rule comments
+under `REVIEW` and continuing after a rejected rerun. The patch already covers
+both and still adds the repository-wide inventory, primary-source citations and
+per-scope partial completion, so it is rebased onto the selected revision.
+Remove it when upstream covers that remaining difference and its behavior is
+verified, with the decision recorded in the owning task. Update the patch,
+manifest, and adapted-path entries together.
 
 ## Checked differences
 

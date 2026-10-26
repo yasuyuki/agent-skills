@@ -62,6 +62,8 @@ Present the synthesizer's full Accepted / Rejected / Backlog output and wait for
 
 Record Backlog items in the existing task Issue/source of truth only when explicit authority already covers that write. Otherwise report them to the user without creating or writing a tracker. Accepted edits retain the approval boundary above.
 
+Never edit a skill under `plugins/cache/` or in a generated native skill folder. Before approval, show the skill's owned source and its existing placement route. After approval, edit that source and return it through that route under existing Git and push policy.
+
 Follow each approved row's Routing exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): the parent does it directly.
