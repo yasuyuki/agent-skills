@@ -17,7 +17,7 @@ Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Gra
 Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
-2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. The rubric is the picker's tool in Phase D. Candidates only see the task.
+2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. The rubric is the picker's tool in Phase D. Candidates only see the task.
 3. Pick necessary independent runners from configured arena entries. Without entries use explicit parent inheritance and only independent work needed for acceptance; no fixed panel count.
 4. Assign non-conflicting outputs using existing registered lifecycle and ownership mechanisms. Do not create unmanaged worktrees or temporary tracking documents.
 
@@ -33,7 +33,7 @@ After candidates complete, choose a configured cross-judge model or inherit pare
 
 ## Phase D: Pick a base
 
-Read every candidate end to end before picking. Score each against the rubric criterion by criterion, not on holistic feel, and compare with the cross-judge. Agreement on the base confirms the pick. Disagreement means one of you is biased or the rubric was ambiguous. Read both rationales before deciding.
+Read every candidate end to end before picking. Score each against the rubric criterion by criterion, not on holistic feel, and compare with the cross-judge when Phase C ran one. Agreement on the base confirms the pick. Disagreement means one of you is biased or the rubric was ambiguous. Read both rationales before deciding.
 
 Pick the base a future maintainer can extend most easily without breaking invariants. When two feel tied, prefer the cleaner boundary or smaller API, per the Laziness Protocol.
 
@@ -49,4 +49,4 @@ Verify the synthesized artifact like any other output, per the **prove-it-works*
 
 ## Outputs
 
-One synthesized artifact, with a short synthesis note alongside naming the base and why, the cross-judge's verdict, each graft with its source candidate, what was rejected and why, any convergence or dropouts, and the verification result.
+One synthesized artifact, with a short synthesis note alongside naming the base and why, the cross-judge's verdict or that Phase C skipped the judge, each graft with its source candidate, what was rejected and why, any convergence or dropouts, and the verification result.
