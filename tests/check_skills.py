@@ -6,6 +6,8 @@
 2. Each bundle with UPSTREAM matches that repository at the pinned commit,
    except the paths listed under "Checked differences" in its MIRROR.md.
    SKILL.md is compared after frontmatter; generated copies are compared too.
+3. Adapted files contain none of the bundle's REMOVED_EXPRESSIONS.json patterns,
+   so an upstream merge cannot silently restore what the adaptation removed.
 
 Rulesync is RULESYNC_EXECUTABLE or ./node_modules/.bin/rulesync
 (`npm ci --ignore-scripts`). Upstream commits are fetched with git.
@@ -194,6 +196,22 @@ def check_upstream(bundle: Path, upstream: Path) -> dict[tuple[str, str], bytes]
     return expected
 
 
+def check_removed_expressions(bundle: Path) -> None:
+    """Adapted files must not regain upstream expressions their adaptation removed."""
+    listing = bundle / "REMOVED_EXPRESSIONS.json"
+    if not listing.is_file():
+        return
+    patterns = [(e["kind"], re.compile(e["pattern"])) for e in json.loads(listing.read_text(encoding="utf-8"))]
+    adapted = [glob for how, glob in mirror_entries(bundle) if how == "adapted"]
+    for rel, path in files(bundle / "skills").items():
+        if not any(fnmatch.fnmatchcase(rel, glob) for glob in adapted):
+            continue
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for kind, pattern in patterns:
+                if pattern.search(line):
+                    fail(f"{bundle.name}/skills/{rel}:{number} regained a removed {kind}: {line.strip()}")
+
+
 def check_local_patches(bundle: Path, upstream: Path) -> dict[tuple[str, str], bytes]:
     manifest = bundle / "LOCAL_PATCHES.json"
     if not manifest.is_file():
@@ -239,6 +257,7 @@ def main() -> int:
             url, commit = (root / "UPSTREAM").read_text(encoding="utf-8").split()[:2]
             upstream = fetch(url, commit, temp / "upstream" / root.name)
             upstream_expected.update(check_upstream(root, upstream))
+            check_removed_expressions(root)
             upstream_expected.update(check_local_patches(root, upstream))
         homes = generate(executable, roots, temp)
 

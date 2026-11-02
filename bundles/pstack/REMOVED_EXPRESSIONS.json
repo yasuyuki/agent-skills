@@ -1,0 +1,8 @@
+[
+  {"kind": "model slug", "pattern": "\\b(?:claude-(?:opus|sonnet|haiku)|grok|cursor-grok|composer|gpt)-[0-9]"},
+  {"kind": "settings path", "pattern": "pstack-models\\.mdc?\\b"},
+  {"kind": "vendor parameter", "pattern": "\\b(?:subagent_type|generalPurpose|run_in_background)\\b"},
+  {"kind": "vendor parameter", "pattern": "\\breadonly: *(?:true|false)\\b"},
+  {"kind": "vendor parameter", "pattern": "\\benvironment: *\"cloud\""},
+  {"kind": "native folder edit", "pattern": "(?i)copy the skill folder|edit the copy"}
+]

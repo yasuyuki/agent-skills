@@ -54,6 +54,11 @@ manifest, and adapted-path entries together.
 
 `python3 tests/check_skills.py` requires every other file under `skills/` to
 match the same skill directory upstream, comparing SKILL.md after frontmatter.
+It also fails when an adapted file contains a pattern from
+`REMOVED_EXPRESSIONS.json`: upstream model slugs, settings paths, vendor
+parameters and native skill folder edits that the adaptation removed. A clean
+three-way merge can restore them silently. Upstream-verbatim files are not
+checked. Add a pattern there when an adaptation removes a new kind of expression.
 Paths are relative to `skills/`:
 
 - license `*/LICENSE.pstack.txt`

@@ -14,7 +14,7 @@ Investigate the motivation and intent behind code. The companion `how` skill ans
 
 Each spawn below uses the configured role named for it or explicit parent inheritance, per [pstack-runtime](../pstack-runtime/SKILL.md).
 
-Every spawn is `generalPurpose` with `readonly: false` (agent mode). **Do not use readonly/Ask mode.** It strips MCP access, which disables the MCP-backed investigators and the synthesizer's citation spot-checks. Investigators still shouldn't write anything.
+Every spawn uses a native mode that keeps MCP access. **Do not use a read-only mode that strips it.** That mode strips MCP access, which disables the MCP-backed investigators and the synthesizer's citation spot-checks. Investigators still shouldn't write anything.
 
 ## Operating Posture
 

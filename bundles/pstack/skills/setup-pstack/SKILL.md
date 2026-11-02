@@ -23,7 +23,7 @@ its repository. Record role entries, reasoning budgets and optional panel lists
 there. Inherit-parent and auto mean omit the native model override. Panel length
 comes from requested/configured independent work, never an upstream fixed count.
 Use the existing Rulesync apply/check route from the owner's documentation.
-Never write generated profiles, Cursor rules or ~/.agents/pstack-models.md.
+Never write generated profiles, Cursor rules or upstream user-level model files.
 
 Verify source settings, placement and native behavior separately. Report the
 owned source changed and any blocked placement/reload/capability check; source
