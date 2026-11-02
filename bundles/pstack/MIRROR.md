@@ -29,6 +29,30 @@ placement; product adapters do not fork or independently rewrite this source.
 Updates do not prove native session adoption; behavioral acceptance belongs to
 the deployment owner. No installer or launch wrapper is added.
 
+## Updating upstream
+
+Run `python3 tools/import_upstream.py bundles/pstack <commit>` from the
+repository root in a task checkout. It merges the change since `UPSTREAM`,
+prepares new skills, repins and rewrites a local patch that no longer applies.
+It exits 1 with what remains:
+
+- **Conflicts.** Keep the adapted side wherever it routes through
+  pstack-runtime or the private profile: delegation, models, settings,
+  permissions and lifecycle. Take upstream wording and behavior elsewhere.
+  When upstream rewrites an adapted workflow, start from its new body and
+  re-apply the same adaptation.
+- **Deleted adapted files.** Delete them with their adapted entries when
+  upstream removed the feature. Keep one only for a behavior the adaptation
+  still needs, and say why in the commit.
+- **New skills.** A workflow that delegates, picks models or edits settings
+  gets the pstack-runtime line and an adapted entry. Others stay upstream.
+- **Removed skills.** Remove their entries below.
+- **Adapted files merged cleanly.** Read their upstream hunks.
+  `tests/check_skills.py` rejects the expressions in `REMOVED_EXPRESSIONS.json`,
+  not every conflict with the runtime contract.
+
+Then run the unit tests and `tests/check_skills.py`.
+
 ## Temporary no-comments patch
 
 [pstack #14](https://github.com/backnotprop/pstack/issues/14) tracks the
