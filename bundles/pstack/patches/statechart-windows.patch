@@ -1,0 +1,114 @@
+diff --git a/skills/statechart/scripts/frontends/dot.ts b/skills/statechart/scripts/frontends/dot.ts
+index 003dfc8..32a41b7 100644
+--- a/skills/statechart/scripts/frontends/dot.ts
++++ b/skills/statechart/scripts/frontends/dot.ts
+@@ -35,7 +35,7 @@ export const parseState = (label: string, parsed = new Map<string, [string, Valu
+ 
+ export type Lines = string | Iterable<string>;
+ 
+-export const linesOf = (input: Lines) => (typeof input === "string" ? input.split("\n") : input);
++export const linesOf = (input: Lines) => (typeof input === "string" ? input.split(/\r?\n/) : input);
+ 
+ export function parseDot(input: Lines): Graph {
+   const states = new Map<string, State>();
+diff --git a/skills/statechart/scripts/run.ts b/skills/statechart/scripts/run.ts
+index 4efd368..8c7bd97 100644
+--- a/skills/statechart/scripts/run.ts
++++ b/skills/statechart/scripts/run.ts
+@@ -55,7 +55,7 @@ export function* fileLines(file: string) {
+         kept = end;
+         continue;
+       }
+-      yield* buf.toString("utf8", 0, cut).split("\n");
++      yield* buf.toString("utf8", 0, cut).split(/\r?\n/);
+       kept = buf.copy(buf, 0, cut + 1, end);
+     }
+     yield buf.toString("utf8", 0, kept);
+@@ -94,10 +94,10 @@ const runChild = (file: string, args: string[], options: { cwd: string; env: Nod
+ 
+ export const killGroup = (pid: number) =>
+   new Promise((resolve) =>
+-    spawn("/bin/sh", ["-c", 'kill -s KILL -- "-$1"', "sh", String(pid)], { stdio: "ignore" }).on(
+-      "exit",
+-      resolve,
+-    ),
++    (process.platform === "win32"
++      ? spawn("taskkill", ["/T", "/F", "/PID", String(pid)], { stdio: "ignore", windowsHide: true })
++      : spawn("/bin/sh", ["-c", 'kill -s KILL -- "-$1"', "sh", String(pid)], { stdio: "ignore" })
++    ).on("exit", resolve),
+   );
+ 
+ export const messageOf = (error: unknown) =>
+@@ -141,7 +141,7 @@ function* outputLines(output: Output) {
+       rest = buf;
+       continue;
+     }
+-    yield* utf8.decode(buf.subarray(0, cut)).split("\n");
++    yield* utf8.decode(buf.subarray(0, cut)).split(/\r?\n/);
+     rest = buf.subarray(cut + 1);
+   }
+   yield utf8.decode(rest);
+diff --git a/skills/statechart/scripts/statechart.ts b/skills/statechart/scripts/statechart.ts
+index 4e2967e..771f4e1 100644
+--- a/skills/statechart/scripts/statechart.ts
++++ b/skills/statechart/scripts/statechart.ts
+@@ -49,6 +49,16 @@ try {
+ const codeOf = (error: unknown) =>
+   error instanceof Error && "code" in error ? error.code : undefined;
+ 
++const WINDOWS_JANITOR = `Promise.all([import("node:child_process"), import("node:fs")]).then(([cp, fs]) => {
++  const [pid, ...dirs] = JSON.parse(process.env.STATECHART_JANITOR);
++  const clean = () => {
++    cp.spawnSync("taskkill", ["/T", "/F", "/PID", pid], { stdio: "ignore", windowsHide: true });
++    for (const dir of dirs) fs.rmSync(dir, { recursive: true, force: true });
++    process.exit(0);
++  };
++  process.stdin.on("end", clean).on("close", clean).resume();
++});`;
++
+ try {
+   const configFile = flags.config ?? specFile.replace(/\.tla$/, ".cfg");
+   if (!fs.existsSync(configFile))
+@@ -110,21 +120,29 @@ try {
+       {
+         detached: true,
+         stdio: ["ignore", "inherit", "inherit"],
+-        env: { ...process.env, TMPDIR: tmp },
++        env: { ...process.env, TMPDIR: tmp, TEMP: tmp, TMP: tmp },
+       },
+     );
+-    janitor = spawn(
+-      "/bin/sh",
+-      [
+-        "-c",
+-        'while read -r line; do :; done; kill -s KILL -- "-$1"; rm -rf -- "$2" "$3"',
+-        "sh",
+-        String(worker.pid),
+-        stage,
+-        tmp,
+-      ],
+-      { detached: true, stdio: ["pipe", "ignore", "ignore"] },
+-    );
++    janitor =
++      process.platform === "win32"
++        ? spawn(process.execPath, [process.versions.deno ? "eval" : "-e", WINDOWS_JANITOR], {
++            detached: true,
++            stdio: ["pipe", "ignore", "ignore"],
++            windowsHide: true,
++            env: { ...process.env, STATECHART_JANITOR: JSON.stringify([String(worker.pid), stage, tmp]) },
++          })
++        : spawn(
++            "/bin/sh",
++            [
++              "-c",
++              'while read -r line; do :; done; kill -s KILL -- "-$1"; rm -rf -- "$2" "$3"',
++              "sh",
++              String(worker.pid),
++              stage,
++              tmp,
++            ],
++            { detached: true, stdio: ["pipe", "ignore", "ignore"] },
++          );
+     const exited = new Promise<number>((resolve) =>
+       worker.on("exit", (code) => resolve(code ?? 2)),
+     );

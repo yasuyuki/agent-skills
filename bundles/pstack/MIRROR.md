@@ -74,6 +74,16 @@ Remove it when upstream covers that remaining difference and its behavior is
 verified, with the decision recorded in the owning task. Update the patch,
 manifest, and adapted-path entries together.
 
+## Windows statechart patch
+
+`patches/statechart-windows.patch` lets statechart run on Windows
+([agent-skills#14](https://github.com/yasuyuki/agent-skills/issues/14)). It
+replaces the `/bin/sh` cleanup with `taskkill` and a runtime-evaluated janitor,
+points the worker's `TEMP` and `TMP` at the folder that cleanup removes, and
+splits TLC output on CRLF, which TLC writes after each message on Windows.
+POSIX keeps the upstream commands. Remove the patch when upstream runs on
+Windows.
+
 ## Checked differences
 
 `python3 tests/check_skills.py` requires every other file under `skills/` to
@@ -119,5 +129,8 @@ Paths are relative to `skills/`:
 - adapted `reflect/SKILL.md`
 - adapted `setup-pstack/SKILL.md`
 - adapted `show-me-your-work/SKILL.md`
+- adapted `statechart/scripts/frontends/dot.ts`
+- adapted `statechart/scripts/run.ts`
+- adapted `statechart/scripts/statechart.ts`
 - adapted `swarm/SKILL.md`
 - adapted `why/SKILL.md`
