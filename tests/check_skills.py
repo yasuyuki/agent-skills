@@ -111,9 +111,11 @@ def check_generated(skills: dict[str, Path], homes: dict[str, Path], expected) -
                     continue
                 path = out / rel
                 got = content(rel, path.read_bytes()) if path.is_file() else None
-                # Rulesync 16.39.1 drops one blank line right after frontmatter.
+                # Rulesync 16.39.1 drops one blank line right after frontmatter and trailing blank lines.
                 if rel.endswith("SKILL.md") and want.startswith(b"\n"):
                     want = want[1:]
+                if rel.endswith("SKILL.md") and want.endswith(b"\n\n"):
+                    want = want.rstrip(b"\n") + b"\n"
                 if got != want:
                     fail(f"{target}: generated {name}/{rel} differs from its expected content")
         if not seen:

@@ -10,7 +10,7 @@ Read [pstack-runtime](../pstack-runtime/SKILL.md) before this workflow. Its nati
 
 # Architect
 
-Design before implementing. Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize necessary independent design perspectives, then fill in code against the chosen sketch. Claim multiple-model evidence only when native execution confirms distinct model identities; inherited or same-model candidates establish independent work, not heterogeneous-model success. If implementation proves the sketch wrong, throw it out and redesign.
+Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize across multiple model perspectives, then fill in code against the chosen sketch.
 
 ## Start
 

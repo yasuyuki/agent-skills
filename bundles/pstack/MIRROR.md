@@ -14,8 +14,22 @@ Deliberate adaptations: directory IDs are frontmatter names; poteto-mode permits
 model invocation; native capability/settings/permission/lifecycle resolution is
 shared in pstack-runtime; setup updates private owned settings via Rulesync;
 unconfigured roles inherit parent rather than fixed upstream model slugs.
-Feature/investigation paths omit routine n/a checkpoints, forced delegation and
-unrequested history/PR operations under the runtime acceptance contract.
+An adaptation stays only when it keeps one of these invariants
+([agent-skills#15](https://github.com/yasuyuki/agent-skills/issues/15)):
+
+- I1. Role models come from the private settings, never upstream default slugs.
+- I2. The existing placement route is the only writer of skills and settings:
+  no native folder edits, plugin installs or writes to upstream settings files.
+- I3. Approval boundaries hold for external writes, PRs, rebase and force push,
+  and unmanaged worktrees.
+- I4. No vendor parameter absent from the native delegation API, and no harness
+  inferred from directory presence.
+- I5. Fixes for observed defects (the patches below).
+
+Cost-only differences (fan-out counts, n/a lines, wording) return to upstream;
+the user's rules take precedence at run time.
+`pstack-runtime/references/agy.md` maps pstack tool actions to the Antigravity
+CLI, adapted from michael-denyer/pstack-claude (MIT) as recorded in that file.
 The custom create-verification-skill is primary, imported from agent-rules
 `skills/create-verification-skill` at `bb93bfcffd117dc7c628052e8939e8320084b609`. Its LICENSE.txt and sources
 reference retain its provenance; upstream feature-map support remains available.
@@ -98,6 +112,7 @@ Paths are relative to `skills/`:
 - license `*/LICENSE.pstack.txt`
 - license `create-verification-skill/LICENSE.txt`
 - added `pstack-runtime/SKILL.md`
+- added `pstack-runtime/references/agy.md`
 - added `create-verification-skill/references/sources.md`
 - adapted `architect/SKILL.md`
 - adapted `arena/SKILL.md`
@@ -117,13 +132,10 @@ Paths are relative to `skills/`:
 - adapted `poteto-mode/playbooks/bug-fix.md`
 - adapted `poteto-mode/playbooks/feature.md`
 - adapted `poteto-mode/playbooks/hillclimb.md`
-- adapted `poteto-mode/playbooks/investigation.md`
 - adapted `poteto-mode/playbooks/multi-phase-plan.md`
 - adapted `poteto-mode/playbooks/perf-issue.md`
 - adapted `poteto-mode/playbooks/refactoring.md`
 - adapted `poteto-mode/playbooks/shipping.md`
-- adapted `poteto-mode/playbooks/runtime-forensics.md`
-- adapted `poteto-mode/playbooks/trace-forensics.md`
 - adapted `principle-never-block-on-the-human/SKILL.md`
 - adapted `recall/SKILL.md`
 - adapted `reflect/SKILL.md`

@@ -17,7 +17,7 @@ Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Gra
 Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
-2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. The rubric is the picker's tool in Phase D. Candidates only see the task.
+2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
 3. Pick necessary independent runners from configured arena entries. Without entries use explicit parent inheritance and only independent work needed for acceptance; no fixed panel count.
 4. Assign non-conflicting outputs using existing registered lifecycle and ownership mechanisms. Do not create unmanaged worktrees or temporary tracking documents.
 

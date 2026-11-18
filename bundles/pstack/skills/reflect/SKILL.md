@@ -1,7 +1,7 @@
 ---
 targets: [codexcli, claudecode, cursor, antigravity-cli]
 name: reflect
-description: Spawn necessary independent review subagents over the active transcript, surface learnings, and route each to a concrete edit on an existing skill. Use when the user says reflect.
+description: Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an existing skill. Use when the user says reflect.
 disable-model-invocation: true
 ---
 
@@ -34,7 +34,7 @@ Where the transcript lives depends on your harness:
 
 Outside Cursor, take the newest candidates first and confirm one by finding the conversation's opening user prompt in its first user message. If none matches, pass a tight digest of the session instead.
 
-## 2. Spawn necessary independent reviewers
+## 2. Spawn three reviewers in parallel
 
 Choose independent lenses needed for acceptance, using the configured roles or explicit parent inheritance. Native calls and read-only access follow pstack-runtime; MCP availability does not grant write authority.
 

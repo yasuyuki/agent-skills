@@ -50,6 +50,7 @@ record it as unobserved and do not claim model diversity. A child's self-report
 or intended prompt alone does not prove execution.
 AGY inherit/flash/pro tiers follow the measured native session capability and
 private profile, never arbitrary model slug translations.
+AGY reads [references/agy.md](references/agy.md) for the tool mapping.
 
 Preserve existing profile budgets and role preferences when they already solve
 the request. Setup changes the owned private source through its documented
