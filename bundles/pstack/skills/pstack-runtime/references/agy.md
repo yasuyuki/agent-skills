@@ -22,7 +22,7 @@ equivalent here. Delegation, models, permissions and lifecycle still follow
 | List or stop subagents | `manage_subagents` with `Action: "list"`, `"kill"` or `"kill_all"` and `ConversationIds` |
 | Ask the human a fixed-choice question | `ask_question` with `questions` (`question`, `options`, `is_multi_select`) |
 | Schedule a self-paced re-invocation | `schedule` with `DurationSeconds` (one-shot) or `CronExpression` (recurring) and `Prompt` |
-| Call an MCP tool | Call it directly as declared in the session's tool list |
+| Call an MCP tool | `call_mcp_tool`; `list_resources` and `read_resource` for MCP resources |
 | Read this session's transcripts | `~/.gemini/antigravity-cli/brain/<conversation-id>/.system_generated/logs/transcript.jsonl` (or `antigravity` / `antigravity-ide` under `~/.gemini/`). Do not read another product's transcript directory. |
 
 ## Subagents
