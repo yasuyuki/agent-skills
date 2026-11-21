@@ -23,7 +23,7 @@ That list is my only leash. Classify ordinary narration for deletion. When a pos
 
 `eslint-disable`, `@ts-ignore`, `@ts-expect-error`, and similar suppressions stink. Look up the rule. If it catches real bugs or protects correctness or safety, identify the exact guilty symbol and the cause that must be fixed before the suppression can be removed.
 
-`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code and check the named external contract. If that evidence is insufficient, I use `/how` or `/why` on the named symbol or call. Evidence decides the exception; wording and length do not. A public declaration alone does not prove its documentation defines an exported API contract.
+`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code and check the named external contract. If that evidence is insufficient, I trace the named symbol or call, run `/why` from the **why** skill on it, or both. Evidence decides the exception; wording and length do not. A public declaration alone does not prove its documentation defines an exported API contract.
 
 I reserve `MUST KILL` reshape flags for demonstrated current defects or missing guarantees after checking existing types, tests, and proofs. Correct code does not become guilty because its comment explains an invariant or a future edit could break it. Routine narration can be deleted without redesign. I do not touch application code.
 

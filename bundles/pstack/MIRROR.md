@@ -1,7 +1,7 @@
 # Pstack source ownership and provenance
 
 Fixed acquisition source: https://github.com/backnotprop/pstack at
-`6c75f4e67546c2ddbf9634734c1e3ebbea34861a` (MIT, Lauren Tan).
+`c3464c11c60b1352d5e8f5f0428a3a6943837568` (MIT, Lauren Tan).
 This is one adapted copy; support references, playbooks and scripts are retained.
 `LICENSE` retains upstream terms. Its fixed notice is copied as
 `LICENSE.pstack.txt` in each skill for standalone native distribution. `UPSTREAM` records the pinned import.
@@ -88,16 +88,6 @@ Remove it when upstream covers that remaining difference and its behavior is
 verified, with the decision recorded in the owning task. Update the patch,
 manifest, and adapted-path entries together.
 
-## Windows statechart patch
-
-`patches/statechart-windows.patch` lets statechart run on Windows
-([agent-skills#14](https://github.com/yasuyuki/agent-skills/issues/14)). It
-replaces the `/bin/sh` cleanup with `taskkill` and a runtime-evaluated janitor,
-points the worker's `TEMP` and `TMP` at the folder that cleanup removes, and
-splits TLC output on CRLF, which TLC writes after each message on Windows.
-POSIX keeps the upstream commands. Remove the patch when upstream runs on
-Windows.
-
 ## Checked differences
 
 `python3 tests/check_skills.py` requires every other file under `skills/` to
@@ -114,7 +104,6 @@ Paths are relative to `skills/`:
 - added `pstack-runtime/SKILL.md`
 - added `pstack-runtime/references/agy.md`
 - added `create-verification-skill/references/sources.md`
-- adapted `architect/SKILL.md`
 - adapted `arena/SKILL.md`
 - adapted `automate-me/SKILL.md`
 - adapted `create-formal-verification-skill/SKILL.md`
@@ -132,17 +121,13 @@ Paths are relative to `skills/`:
 - adapted `poteto-mode/playbooks/bug-fix.md`
 - adapted `poteto-mode/playbooks/feature.md`
 - adapted `poteto-mode/playbooks/hillclimb.md`
-- adapted `poteto-mode/playbooks/multi-phase-plan.md`
 - adapted `poteto-mode/playbooks/perf-issue.md`
 - adapted `poteto-mode/playbooks/refactoring.md`
 - adapted `poteto-mode/playbooks/shipping.md`
+- adapted `poteto-mode/worker.md`
 - adapted `principle-never-block-on-the-human/SKILL.md`
 - adapted `recall/SKILL.md`
 - adapted `reflect/SKILL.md`
 - adapted `setup-pstack/SKILL.md`
 - adapted `show-me-your-work/SKILL.md`
-- adapted `statechart/scripts/frontends/dot.ts`
-- adapted `statechart/scripts/run.ts`
-- adapted `statechart/scripts/statechart.ts`
 - adapted `swarm/SKILL.md`
-- adapted `why/SKILL.md`
