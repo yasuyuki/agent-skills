@@ -1,7 +1,7 @@
 # Pstack source ownership and provenance
 
 Fixed acquisition source: https://github.com/backnotprop/pstack at
-`c3464c11c60b1352d5e8f5f0428a3a6943837568` (MIT, Lauren Tan).
+`9dd340887a043aa1da07a0d5c4e6918bbb3a02a0` (MIT, Lauren Tan).
 This is one adapted copy; support references, playbooks and scripts are retained.
 `LICENSE` retains upstream terms. Its fixed notice is copied as
 `LICENSE.pstack.txt` in each skill for standalone native distribution. `UPSTREAM` records the pinned import.
@@ -14,6 +14,9 @@ Deliberate adaptations: directory IDs are frontmatter names; poteto-mode permits
 model invocation; native capability/settings/permission/lifecycle resolution is
 shared in pstack-runtime; setup updates private owned settings via Rulesync;
 unconfigured roles inherit parent rather than fixed upstream model slugs.
+Upstream's Codex `agents/openai.yaml` mirrors `disable-model-invocation: true`
+and follows the adapted frontmatter here (upstream `mirror-assets/codex-policy.py`):
+omitted for poteto-mode and the custom create-verification-skill, added for setup-pstack.
 An adaptation stays only when it keeps one of these invariants
 ([agent-skills#15](https://github.com/yasuyuki/agent-skills/issues/15)):
 
@@ -104,6 +107,9 @@ Paths are relative to `skills/`:
 - added `pstack-runtime/SKILL.md`
 - added `pstack-runtime/references/agy.md`
 - added `create-verification-skill/references/sources.md`
+- added `setup-pstack/agents/openai.yaml`
+- omitted `create-verification-skill/agents/openai.yaml`
+- omitted `poteto-mode/agents/openai.yaml`
 - adapted `arena/SKILL.md`
 - adapted `automate-me/SKILL.md`
 - adapted `create-formal-verification-skill/SKILL.md`
