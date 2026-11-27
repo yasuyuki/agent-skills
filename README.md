@@ -5,9 +5,6 @@ Public source for reusable agent skills. Select a skill directory and read its
 These generic skills are edited here:
 
 - [human-handoff](skills/human-handoff/SKILL.md) — Make remaining human actions reliable to carry out.
-- [domain-modeling](skills/domain-modeling/SKILL.md) — Record project terms and architecture decisions.
-- [grill-with-docs](skills/grill-with-docs/SKILL.md) — Challenge an idea and capture the resulting domain documents.
-- [grilling](skills/grilling/SKILL.md) — Stress-test a plan or decision.
 - [optimize-human-docs](skills/optimize-human-docs/SKILL.md) — Create or revise human-facing documentation around the reader's decisions and actions.
 - [optimize-agent-docs](skills/optimize-agent-docs/SKILL.md) — Create or revise agent instructions while retaining decisions unavailable from code or help.
 - [coordinate-repository-versions](skills/coordinate-repository-versions/SKILL.md) — Audit cross-repository compatibility and plan owned pin changes, adoption checks, and rollback.
@@ -52,6 +49,12 @@ one owner and decision; native products consume it through existing adapters.
 ## Optional mattpocock bundle
 
 [mattpocock](bundles/mattpocock/MIRROR.md) is a separately selected,
-fixed-revision MIT bundle containing `retro` and its required
-`writing-for-agents`. Select `bundles/mattpocock` as an explicit Rulesync
-`input_roots` entry.
+fixed-revision MIT bundle with 9 skills, including `retro`, `grilling`,
+`grill-with-docs` and `domain-modeling`. Select `bundles/mattpocock` as an
+explicit Rulesync `input_roots` entry.
+
+## Optional anthropic bundle
+
+[anthropic](bundles/anthropic/MIRROR.md) is a separately selected,
+fixed-revision Apache-2.0 bundle containing `frontend-design`. Select
+`bundles/anthropic` as an explicit Rulesync `input_roots` entry.
